@@ -12,7 +12,7 @@ import { CartService } from 'src/app/cart/services/cart.service';
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss'],
 })
-export class CategoryComponent implements OnInit, OnChanges {
+export class CategoryComponent implements OnInit {
   prdList: Product[] = [];
   catList: Category[] = [];
   cartList: any[] = [];
@@ -21,7 +21,7 @@ export class CategoryComponent implements OnInit, OnChanges {
   amount: number = 1;
   isLoading: boolean = false;
   searchText: string = '';
-  catID!: string;
+  id!: string;
 
   constructor(
     private catService: CategoryService,
@@ -29,25 +29,14 @@ export class CategoryComponent implements OnInit, OnChanges {
     private router: Router,
     private cartService: CartService
   ) {}
-  ngOnChanges(): void {
-    // this.getAllPrdForCat();
-  }
+
   getAllPrdForCat() {
     this.isLoading = true;
-    this.activeRoute.params.subscribe((val) => {
-      this.catID = val['id'];
+    this.router.navigate(['cat', this.id]);
+    this.catService.getAllProdForCategory(this.id || '').subscribe((data) => {
+      this.prdList = data;
+      this.isLoading = false;
     });
-
-    console.log(this.catID);
-    this.router.navigate(['cat', this.catID]);
-
-    this.catService
-      .getAllProdForCategory(this.catID || '')
-      .subscribe((data) => {
-        this.prdList = data;
-        this.isLoading = false;
-        // console.log(this.prdList[0].category?.name);
-      });
   }
   prdDetails(prdId: string) {
     this.router.navigate([`details/${prdId}`]);
@@ -165,7 +154,12 @@ export class CategoryComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.getAllPrdForCat();
-    this.getAllCategory();
+    this.activeRoute.params.subscribe({
+      next: (val) => {
+        this.id = val['id'];
+        this.getAllPrdForCat();
+        this.getAllCategory();
+      },
+    });
   }
 }
