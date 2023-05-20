@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+
+<!-- Header -->
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-white header-outer"
+  *ngIf="router.url !== '/login' && router.url !== '/register'"
+>
+  <div class="container header-container">
+    <button
+      class="navbar-toggler rounded-circle p-1"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo03"
+      aria-controls="navbarTogglerDemo03"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="bi bi-list"></span>
+    </button>
+
+    <a class="navbar-brand me-0" routerLink="/"
+      ><img
+        src="https://img.freepik.com/premium-vector/person-with-shopping-cart-shop-purchase-sale-line-icon-shopper-delivery-sign_352905-1226.jpg?w=2000"
+        width="90"
+        height="90"
+        class="ms-4"
+    /></a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" *ngFor="let cat of catList">
+          <div class="dropdown">
+            <a
+              type="button"
+              class="dropbtn nav-link active"
+              (mouseover)="getSubCatforCategory(cat._id)"
+              (mouseenter)="empty()"
+              routerLink="/cat/{{ cat._id }}"
+              >{{ cat.name }}</a
+            >
+            <div class="dropdown-content pt-0 mt-0">
+              <a
+                *ngFor="let sub of subList"
+                routerLink="/subcat/{{ sub._id }}"
+                (change)="empty()"
+                >{{ sub.name }}</a
+              >
+              <a *ngIf="subList.length == 0; error">{{ error }}</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div>
+        <div class="d-flex">
+          <!-- <a class="p-2" type="button"><i class="bi bi-search"></i></a> -->
+          <div class="dropdown">
+            <app-dropdown [hidden]="token !== null"></app-dropdown>
+            <app-logout [hidden]="token == null"></app-logout>
+          </div>
+          <a class="p-2" type="button" routerLink="/cart"
+            ><i class="bi bi-basket position-relative pe-2"></i>
+            <span
+              class="position-absolute top-70 start-90 translate-middle badge rounded-pill"
+            >
+              {{ cartCount$ | async }}
+            </span></a
+          >
+          <a class="p-2 pe-0" type="button"
+            ><i class="bi bi-geo-alt-fill"></i
+          ></a>
+          <span class="p-0 location">Address Location</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

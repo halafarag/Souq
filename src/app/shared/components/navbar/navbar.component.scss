@@ -1,0 +1,21 @@
+.navbar {
+  background-color: #f5ebeb;
+}
+strong {
+  font-weight: 700;
+  font-family: "Roboto", "Noto Kufi Arabic";
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #663a2a !important;
+}
+nav {
+  top: 0;
+  width: 100%;
+  color: white;
+  background-color: #2980b9;
+  padding: 0 2rem;
+}
+
+nav.nav--hidden {
+  transform: translateY(-100%);
+}

@@ -1,0 +1,86 @@
+<footer
+  class="site-footer"
+  *ngIf="router.url !== '/login' && router.url !== '/register'"
+>
+  <div class="container mb-4">
+    <div class="row px-5 p-5">
+      <div class="col-sm-12 col-lg-3 col-md-6">
+        <h6><strong>Souq Patisserie</strong></h6>
+        <ul class="list-unstyled mt-4">
+          <li>
+            <i
+              class="bi bi-telephone text-white p-1 fw-bold"
+              style="background-color: #6f3c2e; font-size: 70%"
+            ></i>
+            +20 01149334819
+          </li>
+          <li>
+            <i class="bi bi-envelope fw-bold"></i>
+            halaafaragg@gmail.com
+          </li>
+          <li class="mb-3">
+            Working hours from 9 AM to 12 AM, 7 days per week
+          </li>
+          <li><strong class="pay">Payment Methods</strong></li>
+          <li>
+            <img
+              src="data:image/png;base64,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"
+              width="70"
+              height="40"
+            />
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-xs-6 col-lg-2 col-md-6">
+        <h6><strong>Our Categories</strong></h6>
+        <ul class="list-unstyled mt-4">
+          <li *ngFor="let cat of catList">
+            <i class="bi bi-arrow-right-short"></i> {{ cat.name }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-xs-6 col-lg-2 col-md-6 d-xs-none d-md-block">
+        <h6><strong>About Us</strong></h6>
+        <ul class="list-unstyled mt-4">
+          <li><i class="bi bi-arrow-right-short"></i>About Us</li>
+          <li><i class="bi bi-arrow-right-short"></i>Terms And Conditions</li>
+        </ul>
+      </div>
+      <div class="col-xs-6 col-lg-2 col-md-6">
+        <h6><strong>Follow us</strong></h6>
+        <ul class="social-icons" style="padding-left: 0px">
+          <li>
+            <a class="hover m-2 ms-0"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li>
+            <a class="hover m-2"><i class="bi bi-instagram"></i></a>
+          </li>
+          <li>
+            <a class="hover m-2"><i class="bi bi-youtube"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <hr />
+
+  <div class="container mb-0">
+    <div class="row">
+      <div class="col-md-8 col-sm-6 col-xs-12">
+        <p class="copyright-text">
+          Copyright &copy; 2023 EL Abd Patisserie .
+          <a> All rights reserved.</a>.
+        </p>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <p style="text-align: right" class="d-none d-sm-block">
+          Powered By
+          <span style="color: #fcb4a9"> AlAzhar Team</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

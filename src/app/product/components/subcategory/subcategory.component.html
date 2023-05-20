@@ -1,0 +1,116 @@
+<div class="container mt-5">
+  <div *ngIf="isLoading"><app-loader></app-loader></div>
+  <div
+    class="row bg-light col-11 m-auto my-5 d-flex justify-content-between py-2"
+  >
+    <div class="col-5">
+      <span class="p-3" style="color: #43464b"
+        ><i class="bi bi-house-door-fill"></i> /
+        {{ prdList[0]?.category?.name }} / {{ prdList[0]?.subcategory?.name }}
+      </span>
+    </div>
+
+    <!-- search -->
+    <div class="col-3">
+      <div class="input-group">
+        <input
+          class="form-control border rounded-pill"
+          type="search"
+          placeholder="Search With Product Name"
+          id="example-search-input"
+          [(ngModel)]="searchText"
+        />
+      </div>
+    </div>
+    <!--  -->
+  </div>
+  <div class="row d-flex justify-content-around col-9">
+    <div class="form-group col-md-4 col-xs-12">
+      <select
+        (change)="sort($event)"
+        class="form-select mb-4 ms-3 border border-0"
+        aria-label="Default select example"
+      >
+        <option value="" selected disabled hidden>Sort By</option>
+        <option value="Name">Name A To Z</option>
+        <option value="Low">Price: Low to High</option>
+        <option value="High">Price: High to Low</option>
+      </select>
+    </div>
+  </div>
+  <!--  -->
+  <div class="row d-flex justify-content-end me-5 pe-2">
+    <span class="border-top mb-5 brtop"></span>
+  </div>
+
+  <!--  -->
+  <div class="row d-flex flex-wrap my-5">
+    <!-- list -->
+    <div class="col-xs-12 col-sm-4 col-md-5 col-xl-3 rounded shadow-sm card">
+      <ul class="list-group">
+        <li class="list-group-item li">
+          <strong
+            style="font-weight: bold; font-size: 18px; color: #43464b"
+            class="fw-bold"
+            >Categories</strong
+          >
+        </li>
+        <li class="list-group-item li" *ngFor="let cat of catList">
+          <i class="bi bi-arrow-right-circle-fill pe-2"></i> {{ cat.name }}
+        </li>
+      </ul>
+    </div>
+    <!-- card -->
+    <div
+      class="col-xs-12 col-sm-4 col-md-5 col-xl-3 my-3"
+      *ngFor="let prd of prdList | filter : searchText"
+    >
+      <div class="card">
+        <div class="img p-5" (click)="prdDetails(prd._id)">
+          <img
+            src="{{ prd.img[0] }}"
+            class="card-img-top"
+            width="157.500"
+            height="157.500"
+          />
+        </div>
+
+        <div class="card-body">
+          <h1 type="button" class="card-title text-center">
+            {{ prd.name }}
+          </h1>
+          <div class="text-center mb-4">
+            <span class="price pt-2"> {{ prd.price }} ج.م.‏</span>
+          </div>
+
+          <hr />
+          <!--  -->
+
+          <div class="text-center" *ngIf="prd.quantity >= 1">
+            <ul class="social-icons" style="padding-left: 0px">
+              <li>
+                <a class="hover mx-2 shadow-sm">
+                  <i
+                    (click)="addToFav(prd)"
+                    class="bi bi-suit-heart border-0"
+                  ></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="hover mx-2 shadow-sm border-0"
+                  (click)="addToLocalStorge(prd)"
+                  ><i class="bi bi-basket"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+          <div class="text-center text-danger" *ngIf="prd.quantity == 0">
+            Out Of Stock
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+  </div>
+</div>
