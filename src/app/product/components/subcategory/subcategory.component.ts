@@ -31,7 +31,6 @@ export class SubcategoryComponent implements OnInit {
   ) {}
   getAllPrdForSub() {
     this.isLoading = true;
-
     this.subCatService.getAllProdForSubcat(this.id || '').subscribe((data) => {
       this.prdList = data;
       this.isLoading = false;
